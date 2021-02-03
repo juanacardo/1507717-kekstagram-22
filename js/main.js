@@ -1,17 +1,18 @@
 // Функция, возвращающая целое число из диапазона, создана на основе функции getRandomIntInclusive (https://developer.mozilla.org/)
 
 const getRandomNumber = (min, max) => {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.abs(Math.floor(Math.random() * (max - min + 1)) + min);
+  let minValue = Math.ceil(min);
+  let maxValue = Math.floor(max);
+  if (minValue < 0 || maxValue < 0 || minValue >= maxValue) {
+    alert('Пожалуйста, введите корректные данные');
+  }
+  return Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue;
 };
 
-getRandomNumber(1, 100);
+getRandomNumber(100, 100);
 
 // Функция для проверки максимальной длины строки
 
-const checkStringLenght = (string, maxLenght) => {
-  return (string.length > maxLenght) ? false : true;
-}
+const checkStringLenght = (string, maxLenght) => string.length > maxLenght;
 
 checkStringLenght('Привет!', 140);
