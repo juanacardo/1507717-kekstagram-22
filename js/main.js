@@ -67,6 +67,30 @@ const getRandomArrayElement = (elements) => {
   return elements[getRandomNumber(0, elements.length - 1)];
 }
 
+// Функция для получения массива последовательных чисел
+
+const getNumbersArray = (min, max) => {
+  let numbersArray = [];
+  for (let i = 0; i <= max - min; i++) {
+    numbersArray[i] = min + i;
+  }
+  if (min < 0 || max < 0 || min >= max) {
+    alert('Пожалуйста, введите корректные данные');
+  }
+  return numbersArray;
+};
+
+const sortArray = () => {
+  let newArray = getNumbersArray(1, 25);
+  let randomElement;
+  for (let i = 0; i <= newArray.length - 1; i++) {
+    randomElement = getRandomArrayElement(newArray);
+  }
+  return randomElement;
+}
+
+sortArray();
+
 const createComment = () => {
   return {
     id: getRandomNumber(1, 150),
@@ -84,7 +108,7 @@ const createPhotoDescription = () => {
     likes: getRandomNumber(15, 200),
     comments: createComment(),
   }
-}
+};
 
 const photos = new Array(PHOTO_COUNT).fill(null).map(() => createPhotoDescription());
 alert(photos);
