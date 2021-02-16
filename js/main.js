@@ -1,4 +1,3 @@
-
 'use strict';
 
 // Функция, возвращающая целое число из диапазона, создана на основе функции getRandomIntInclusive (https://developer.mozilla.org/)
@@ -63,13 +62,19 @@ const PHOTO_COUNT = 25;
 
 // Функция для получения случайного индекса массива
 
-const getRandomArrayElement = (elements) => {
-  return elements[getRandomNumber(0, elements.length - 1)];
+const getRandomArrayElement = (elements, slice) => {
+  const result = elements[getRandomNumber(0, elements.length - 1)];
+
+  if (slice) {
+    elements = elements.filter(item => item === result)
+  }
+
+  return result
 }
 
 // Функция для получения массива последовательных чисел
 
-const getNumbersArray = (min, max) => {
+const generateSequenceOfNumbers = (min, max) => {
   let numbersArray = [];
   for (let i = 0; i <= max - min; i++) {
     numbersArray[i] = min + i;
@@ -80,16 +85,6 @@ const getNumbersArray = (min, max) => {
   return numbersArray;
 };
 
-const sortArray = () => {
-  let newArray = getNumbersArray(1, 25);
-  let randomElement;
-  for (let i = 0; i <= newArray.length - 1; i++) {
-    randomElement = getRandomArrayElement(newArray);
-  }
-  return randomElement;
-}
-
-sortArray();
 
 const createComment = () => {
   return {
@@ -100,9 +95,9 @@ const createComment = () => {
   };
 };
 
-const createPhotoDescription = () => {
+const createPhotoDescription = (id) => {
   return {
-    id: getRandomNumber(1, 25),
+    id: id,
     url: 'photos/' + getRandomNumber(1, 25) + '.jpg',
     description: getRandomArrayElement(DESCRIPTIONS),
     likes: getRandomNumber(15, 200),
@@ -110,5 +105,7 @@ const createPhotoDescription = () => {
   }
 };
 
-const photos = new Array(PHOTO_COUNT).fill(null).map(() => createPhotoDescription());
-alert(photos);
+const photosIds = generateSequenceOfNumbers(1, 25)
+
+const photos = new Array(PHOTO_COUNT).fill(null).map(() => createPhotoDescription(getRandomArrayElement(photosIds, true)));
+console.log(photos);
