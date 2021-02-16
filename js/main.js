@@ -5,7 +5,7 @@
 const getRandomNumber = (min, max) => {
   let minValue = Math.ceil(min);
   let maxValue = Math.floor(max);
-  if (minValue < 0 || maxValue < 0 || minValue >= maxValue) {
+  if (minValue < 0 || maxValue < 0 || minValue > maxValue) {
     alert('Пожалуйста, введите корректные данные');
   }
   return Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue;
@@ -62,11 +62,11 @@ const PHOTO_COUNT = 25;
 
 // Функция для получения случайного индекса массива
 
-const getRandomArrayElement = (elements, slice) => {
+const getRandomArrayElement = (elements, splice) => {
   const result = elements[getRandomNumber(0, elements.length - 1)];
 
-  if (slice) {
-    elements = elements.filter(item => item === result)
+  if (splice) {
+    elements.splice(elements.indexOf(result), 1)
   }
 
   return result
@@ -86,9 +86,9 @@ const generateSequenceOfNumbers = (min, max) => {
 };
 
 
-const createComment = () => {
+const createComment = (id) => {
   return {
-    id: getRandomNumber(1, 150),
+    id: id,
     avatar: 'img/avatar-' + getRandomNumber(1, 6) + '.svg',
     message: getRandomArrayElement(MESSAGES),
     name: getRandomArrayElement(NAMES),
@@ -98,14 +98,15 @@ const createComment = () => {
 const createPhotoDescription = (id) => {
   return {
     id: id,
-    url: 'photos/' + getRandomNumber(1, 25) + '.jpg',
+    url: 'photos/' + id + '.jpg',
     description: getRandomArrayElement(DESCRIPTIONS),
     likes: getRandomNumber(15, 200),
-    comments: createComment(),
+    comments: createComment(getRandomArrayElement(commentsIds, true)),
   }
 };
 
-const photosIds = generateSequenceOfNumbers(1, 25)
+const photosIds = generateSequenceOfNumbers(1, 25);
+const commentsIds = generateSequenceOfNumbers(1, 150);
 
 const photos = new Array(PHOTO_COUNT).fill(null).map(() => createPhotoDescription(getRandomArrayElement(photosIds, true)));
-console.log(photos);
+alert(photos);
