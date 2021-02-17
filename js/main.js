@@ -96,17 +96,17 @@ const createComment = (id) => {
 };
 
 const createPhotoDescription = (id) => {
+  const commentsIds = generateSequenceOfNumbers(1, 150);
   return {
     id: id,
     url: 'photos/' + id + '.jpg',
     description: getRandomArrayElement(DESCRIPTIONS),
     likes: getRandomNumber(15, 200),
-    comments: createComment(getRandomArrayElement(commentsIds, true)),
+    comments: new Array(2).fill(null).map(() => createComment(getRandomArrayElement(commentsIds, true))),
   }
 };
 
 const photosIds = generateSequenceOfNumbers(1, 25);
-const commentsIds = generateSequenceOfNumbers(1, 150);
 
 const photos = new Array(PHOTO_COUNT).fill(null).map(() => createPhotoDescription(getRandomArrayElement(photosIds, true)));
 alert(photos);
