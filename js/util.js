@@ -1,5 +1,3 @@
-
-
 // Функция, возвращающая целое число из диапазона, создана на основе функции getRandomIntInclusive (https://developer.mozilla.org/)
 
 const getRandomNumber = (min, max) => {

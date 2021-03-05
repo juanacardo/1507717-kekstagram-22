@@ -104,4 +104,5 @@ const createPhotoDescription = (id) => {
 const photosIds = generateSequenceOfNumbers(MIN_PHOTO_ID_NUMBER, MAX_PHOTO_ID_NUMBER);
 
 const photos = new Array(PHOTO_COUNT).fill(null).map(() => createPhotoDescription(getRandomArrayElement(photosIds, true)));
-alert(photos);
+
+export {photos};
