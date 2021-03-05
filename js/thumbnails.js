@@ -4,7 +4,6 @@ const photoContainer = document.querySelector('.pictures');
 const photoTemplate = document.querySelector('#picture').content;
 
 const userPhotos = photos;
-console.log(userPhotos);
 const photoFragment = document.createDocumentFragment();
 
 userPhotos.forEach(({url, likes, comments}) => {
